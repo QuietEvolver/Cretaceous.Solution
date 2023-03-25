@@ -18,11 +18,18 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    // app.UseSwaggerUI();
+    // To serve the Swagger UI at the app's root (https://localhost:<port>/), set the RoutePrefix property to an empty string
+    app.UseSwaggerUI(options => 
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); 
+        options.RoutePrefix = string.Empty;
+    });
 }
-
-app.UseHttpsRedirection();
-
+else
+{
+    app.UseHttpsRedirection();
+}
 app.UseAuthorization();
 
 app.MapControllers();

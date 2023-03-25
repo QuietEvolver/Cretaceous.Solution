@@ -4,6 +4,7 @@ namespace CretaceousApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+// Note: Controller class supports views, while the ControllerBase class does not. Focus is on extending API.
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]

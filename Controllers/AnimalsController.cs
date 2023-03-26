@@ -44,6 +44,8 @@ namespace CretaceousApi.Controllers
       await _db.SaveChangesAsync();
       return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }    
+
+    //  PUT action requires an entire object with all of its properties in order to make an update to it in the database. An alternative to thissupport partial updates: use PATCH instead:
     // (edit existing info): PUT requires a body with the entire updated animal object (including the AnimalId
     // PUT http://localhost:5000/api/animals/{id}
     // ie. PUT: api/Animals/5
@@ -78,6 +80,24 @@ namespace CretaceousApi.Controllers
     private bool AnimalExists(int id)
     {
       return _db.Animals.Any(e => e.AnimalId == id);
+    }
+
+    // DELETE requests to the following endpoint, where {id} is the variable for the AnimalId of the animal that we want to remove from out database:
+    // DELETE http://localhost:5000/api/animals/{id}
+    // ie. DELETE: api/Animals/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAnimal(int id)
+    {
+      Animal animal = await _db.Animals.FindAsync(id);
+      if (animal == null)
+      {
+        return NotFound();
+      }
+
+      _db.Animals.Remove(animal);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
     }
   }
 }

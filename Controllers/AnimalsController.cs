@@ -32,6 +32,7 @@ namespace CretaceousApi.Controllers
         query = query.Where(entry => entry.Name == name); // http://localhost:5000/api/animals?species=dinosaur&name=matilda
       }
       // [Range=
+      // ie. http://localhost:5000/api/animals?minimumAge=5
       if (minimumAge > 0)
       {
         query =  query.Where(entry => entry.Age >= minimumAge);

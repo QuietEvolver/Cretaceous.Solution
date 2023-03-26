@@ -44,5 +44,40 @@ namespace CretaceousApi.Controllers
       await _db.SaveChangesAsync();
       return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }    
+    // (edit existing info): PUT requires a body with the entire updated animal object (including the AnimalId
+    // PUT http://localhost:5000/api/animals/{id}
+    // ie. PUT: api/Animals/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, Animal animal)
+    {
+      if (id != animal.AnimalId)
+      {
+        return BadRequest();
+      }
+      _db.Animals.Update(animal);
+
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!AnimalExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw; 
+        }
+      }
+
+      return NoContent();
+    }
+
+    private bool AnimalExists(int id)
+    {
+      return _db.Animals.Any(e => e.AnimalId == id);
+    }
   }
 }

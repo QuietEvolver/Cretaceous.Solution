@@ -17,7 +17,7 @@ namespace CretaceousApi.Controllers
 
     // GET api/Animals
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> Get( [FromQuery] string species) // update params to handle query
+    public async Task<ActionResult<IEnumerable<Animal>>> Get( [FromQuery] string species, string name) // update params to handle query// & add'l q = name
     {
       // add search parameters to our Get() controller action so that we can request and retrieve filtered data.
       // http://localhost:5000/api/animals?species=dinosaur
@@ -26,7 +26,11 @@ namespace CretaceousApi.Controllers
       {
         query = query.Where(entry => entry.Species == species);
       }
-      //
+      // param: string name && q = name
+      if ( name != null)
+      {
+        query = query.Where(entry => entry.Name == name); // http://localhost:5000/api/animals?species=dinosaur&name=matilda
+      }
       return await _db.Animals.ToListAsync();
     }
 

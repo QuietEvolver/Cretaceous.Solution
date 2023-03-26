@@ -17,7 +17,7 @@ namespace CretaceousApi.Controllers
 
     // GET api/Animals
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> Get( string species) // update params to handle query
+    public async Task<ActionResult<IEnumerable<Animal>>> Get( [FromQuery] string species) // update params to handle query
     {
       // add search parameters to our Get() controller action so that we can request and retrieve filtered data.
       // http://localhost:5000/api/animals?species=dinosaur

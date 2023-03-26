@@ -36,6 +36,13 @@ namespace CretaceousApi.Controllers
       return animal;
     }
 
-    
+    // (new seed/input.cshtml) ie. POST api/animals
+    [HttpPost]
+    public async Task<ActionResult<Animal>> Post(Animal animal)
+    { 
+      _db.Animals.Add(animal);
+      await _db.SaveChangesAsync();
+      return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
+    }    
   }
 }

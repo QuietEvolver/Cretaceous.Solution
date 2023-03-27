@@ -30,6 +30,13 @@ This project uses Identity in an ASP.NET Core MVC project to authenticate users.
 * Some endpoints include optional query strings that we'll want to document.
 * Some endpoints require a body to be included along with the request.
 
+GET http://localhost:5000/api/animals/
+GET http://localhost:5000/api/animals/{id}
+POST http://localhost:5000/api/animals/
+PUT http://localhost:5000/api/animals/{id}
+DELETE http://localhost:5000/api/animals/{id}
+
+Note: The {id} in the URL is a variable and it should be replaced with the id number of the animal the user wants to GET, PUT, or DELETE.
 
 ## How To Run This Project
 

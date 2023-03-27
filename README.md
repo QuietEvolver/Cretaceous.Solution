@@ -22,6 +22,15 @@ This project shows how to connect an ASP.NET Core MVC project to a MySQL databas
 
 This project uses Identity in an ASP.NET Core MVC project to authenticate users. This project contains a one-to-many relationship between `Book` and `Library`, a one-to-many relationship between `Book` and `Author`/`Patron` and `Copy`,  and a one-to-many relationship between `ApplicationUser` and `Library`. 
 
+## Endpoints: TODO----Call controllers [get/post]
+
+ Document our API's endpoints, make sure we consider what is in our API. For example, in our API:
+
+* We have multiple endpoints, all of which we want to include in our documentation.
+* Some endpoints include optional query strings that we'll want to document.
+* Some endpoints require a body to be included along with the request.
+
+
 ## How To Run This Project
 
 If you have not already, install the `dotnet-ef` tool by running the following command in your terminal:

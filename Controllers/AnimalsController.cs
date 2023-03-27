@@ -38,7 +38,7 @@ namespace CretaceousApi.Controllers
         query =  query.Where(entry => entry.Age >= minimumAge);
       }
 
-      return await _db.Animals.ToListAsync();
+      return await _db.query.ToListAsync(); // Animals
     }
 
     // ie. GET: api/Animals/5

@@ -38,6 +38,32 @@ DELETE http://localhost:5000/api/animals/{id}
 
 Note: The {id} in the URL is a variable and it should be replaced with the id number of the animal the user wants to GET, PUT, or DELETE.
 
+```
+
+  Parameter	|  Type   |	Required	    | Description
+* species	  | String	| not required	| Returns animals with a matching species value
+◊ GET http://localhost:5000/api/animals?species=[ENTER-MATCHING-SPECIES-VALUE]
+* name	    | String	| not required	 | Returns animals with a matching name value
+◊ GET http://localhost:5000/api/animals?name=[ENTER-MATCHING-NAME-VALUE]
+* minimumAge | Number	| not required  | Returns animals that have an age value that is greater than or equal to the specified minimumAge value
+◊GET http://localhost:5000/api/animals?minimumAge=[ENTER-MINIMUM-AGE-INTEGER-VALUE]
+* species&minimumAge | String & Number | neither required	| Returns animals with a matching species value and an age value that is greater than or equal to the specified minimumAge value
+◊ GET http://localhost:5000/api/animals?species=[ENTER-MATCHING-SPECIES-VALUE]&minimumAge=[ENTER-MINIMUM-AGE-INTEGER-VALUE]
+
+◊ POST request to http://localhost:5000/api/animals/, must have a JSON body included when being made. Here is an example body in JSON:
+
+{
+  "species": "Tyrannosaurus Rex",
+  "name": "Elizabeth",
+  "age": 8
+}
+
+◊ PUT request we would send the previous body to:
+
+http://localhost:5000/api/animals/1
+Notice that the value of animalId needs to match the id number in the URL. In this example, they are both 1.
+``` 
+
 ## How To Run This Project
 
 If you have not already, install the `dotnet-ef` tool by running the following command in your terminal:

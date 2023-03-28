@@ -12,9 +12,12 @@ namespace CretaceousClient.Models
     public string Species { get; set; }
     public int Age { get; set; }
 
+
+    // GetAnimals() method handles calling a method that queries our API for all Animal objects and deserializing the API's response.
     public static List<Animal> GetAnimals()
     {
-      var apiCallTask = ApiHelper.GetAll();
+      // NOTE: we don't pass an API key as an argument to ApiHelper.GetAll();. Your personal API will not require a key unless you add Token-Based Authentication through your further exploration.
+      var apiCallTask = ApiHelper.GetAll(); // ApiHelper class model will contain .GetAll() definition
       var result = apiCallTask.Result;
 
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);

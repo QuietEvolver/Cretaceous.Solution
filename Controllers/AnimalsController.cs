@@ -53,6 +53,7 @@ namespace CretaceousApi.Controllers
             var totalResultCount = query.Count();
             var items = query.Skip((pageNumber - 1) * resultsPerPage).Take(resultsPerPage).ToList();
             var totalPages = (int)Math.Ceiling((double)totalResultCount / resultsPerPage);
+            // $ dotnet add package Newtonsoft.Json --version 13.0.1 (v.2021)
             // var metadata = new
             // {
             //     totalResultCount,

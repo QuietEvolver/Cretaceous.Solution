@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CretaceousApi.Models;
+using Newtonsoft.Json;
 
 namespace CretaceousApi.Controllers
 {
@@ -54,16 +55,16 @@ namespace CretaceousApi.Controllers
             var items = query.Skip((pageNumber - 1) * resultsPerPage).Take(resultsPerPage).ToList();
             var totalPages = (int)Math.Ceiling((double)totalResultCount / resultsPerPage);
             // $ dotnet add package Newtonsoft.Json --version 13.0.1 (v.2021)
-            // var metadata = new
-            // {
-            //     totalResultCount,
-            //     resultsPerPage,
-            //     currentPage = pageNumber,
-            //     totalPages
-            // };
-            // Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            var metadata = new
+            {
+                totalResultCount,
+                resultsPerPage,
+                currentPage = pageNumber,
+                totalPages
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return items.ToList();
-            // return await query.ToListAsync();
+           
         }
 
 

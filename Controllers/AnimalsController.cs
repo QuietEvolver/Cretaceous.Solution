@@ -20,11 +20,78 @@ namespace CretaceousApi.Controllers
             _context = context;
         }
 
+        // Pagination: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+       /* public async Task<IActionResult> Index(string sortOrder)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["AgeSortParm"] = sortOrder == "Age" ? "age_desc" : "Age";
+            var animals = from ani in _context.Animals
+                        select ani; // NOTE! rebuilt FKA: _db = db; 
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    animals = animals.OrderByDescending(ani => ani.Name);
+                    break;
+                case "Age":
+                    animals = animals.OrderBy(ani => ani.Age);
+                    break;
+                case "age_desc":
+                    animals = animals.OrderByDescending(ani => ani.Age);
+                    break;
+                default:
+                    animals = animals.OrderBy(ani => ani.Name);
+                    break;
+            }
+            return View(await animals.AsNoTracking().ToListAsync());
+        }*/
+
+        [Route("api/tryjson")]
+        [HttpGet]
+        public ActionResult<IEnumerable<Animal>> Get(int pageNumber = 1, int resultsPerPage = 2)
+        {
+            var query = _context.Animals.OrderBy(x => x.AnimalId);
+            var totalResultCount = query.Count();
+            var items = query.Skip((pageNumber - 1) * resultsPerPage).Take(resultsPerPage).ToList();
+            var totalPages = (int)Math.Ceiling((double)totalResultCount / resultsPerPage);
+            // var metadata = new
+            // {
+            //     totalResultCount,
+            //     resultsPerPage,
+            //     currentPage = pageNumber,
+            //     totalPages
+            // };
+            // Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            return items.ToList();
+            // return await query.ToListAsync();
+        }
+
+
         // GET: api/Animals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Animal>>> GetAnimals()
+        public async Task<ActionResult<IEnumerable<Animal>>> Get( string species, string name, int minimumAge) //, int pageNumber = 1, int resultsPerPage = 2) //[FromQuery] // update params to handle query// & add'l q = name // [Range]: int minimumAge
         {
-            return await _context.Animals.ToListAsync();
+        // add search parameters to our Get() controller action so that we can request and retrieve filtered data.
+        // http://localhost:5000/api/animals?species=dinosaur
+            IQueryable<Animal> query = _context.Animals.AsQueryable();
+            if ( species != null)
+            {
+                query = query.Where(entry => entry.Species == species);
+            }
+            // param: string name && q = name
+            if ( name != null)
+            {
+                query = query.Where(entry => entry.Name == name); // http://localhost:5000/api/animals?species=dinosaur&name=matilda
+            }
+            // [Range=
+            // ie. http://localhost:5000/api/animals?minimumAge=5
+            if (minimumAge > 0)
+            {
+                query =  query.Where(entry => entry.Age >= minimumAge);
+            }
+        
+        // public async Task<ActionResult<IEnumerable<Animal>>> GetAnimals()
+        // {
+            return await query.ToListAsync();
         }
 
         // GET: api/Animals/5

@@ -86,10 +86,18 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 
 ```json
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*", 
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=to_do_list_with_auth;uid=root;pwd=epicodus;"
+    "DefaultConnection": "Server=localhost;Port=3306;database=cretaceous_api;uid=YOUR-USERNAME;pwd=YOUR-PASSWORD;"
   }
 }
+
 ```
 
 5. Create the database using the migrations in the To Do List project. Open your shell (e.g., Terminal or GitBash) to the production directory "ToDoList", and run `dotnet ef database update`. 

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using RestSharp;
 
-namespace CretaceiousClient.Models
+namespace CretaceousClient.Models
 {
   public class ApiHelper
   {
@@ -31,6 +31,15 @@ namespace CretaceiousClient.Models
     }
 
     public static async void Put(int id, string newAnimal)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/animals/{id}", Method.Put);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newAnimal);
+      await client.PutAsync(request);
+    }
+
+    public static async void Delete(int id, string newAnimal)
     {
       RestClient client = new RestClient("http://localhost:5000/");
       RestRequest request = new RestRequest($"api/animals/{id}", Method.Put);

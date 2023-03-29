@@ -27,14 +27,20 @@ namespace CretaceousClient.Models
     }
 
     public static Animal GetDetails(int id)
-  {
-    var apiCallTask = ApiHelper.Get(id);
-    var result = apiCallTask.Result;
+    {
+      var apiCallTask = ApiHelper.Get(id);
+      var result = apiCallTask.Result;
 
-    JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-    Animal animal = JsonConvert.DeserializeObject<Animal>(jsonResponse.ToString());
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Animal animal = JsonConvert.DeserializeObject<Animal>(jsonResponse.ToString());
 
-    return animal;
-  }
+      return animal;
+    }
+
+    public static void Post(Animal animal)
+    {
+      string jsonAnimal = JsonConvert.SerializeObject(animal);
+      ApiHelper.Post(jsonAnimal);
+    }
   }
 }

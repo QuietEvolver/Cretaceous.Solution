@@ -16,4 +16,9 @@ public class AnimalsController : Controller
     Animal animal = Animal.GetDetails(id);
     return View(animal);
   }
+
+  public ActionResult Create()
+  {
+    return View();
+  }
 }

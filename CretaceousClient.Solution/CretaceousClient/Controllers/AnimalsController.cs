@@ -21,4 +21,11 @@ public class AnimalsController : Controller
   {
     return View();
   }
+
+  [HttpPost]
+  public ActionResult Create(Animal animal)
+  {
+    Animal.Post(animal);
+    return RedirectToAction("Index");
+  }
 }

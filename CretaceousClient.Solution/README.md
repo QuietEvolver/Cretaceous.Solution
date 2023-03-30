@@ -1,4 +1,4 @@
-#  Cretaceous Park - an Api Solution
+#  Cretaceous Park - a ClientSide Solution
 
 #### By Vera Weikel 
 

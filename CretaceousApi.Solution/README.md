@@ -1,6 +1,6 @@
-#  Cretaceous Park - an Api Solution
+#  Cretaceous Park - an API Solution
 
-#### By Vera Weikel 
+#### By Chris Johnedis, John Diggins, & Vera Weikel 
 
 #### This is a project to build Basic Web Api Application using ASP .Net, MVC, and EF Core databases.
 
@@ -20,11 +20,11 @@ This project shows how to connect an ASP.NET Core MVC project to a MySQL databas
 
 ## Description
 
-This project uses Identity in an ASP.NET Core MVC project to authenticate users. This project contains a one-to-many relationship between `Book` and `Library`, a one-to-many relationship between `Book` and `Author`/`Patron` and `Copy`,  and a one-to-many relationship between `ApplicationUser` and `Library`. 
+This project uses Identity in an ASP.NET Core API project to authenticate users.
 
-## Endpoints: TODO----Call controllers [get/post]
+## Endpoints: 
 
- Document our API's endpoints, make sure we consider what is in our API. For example, in our API:
+Document our API's endpoints, make sure we consider what is in our API. For example, in our API:
 
 * We have multiple endpoints, all of which we want to include in our documentation.
 * Some endpoints include optional query strings that we'll want to document.
@@ -63,6 +63,11 @@ Note: The {id} in the URL is a variable and it should be replaced with the id nu
 http://localhost:5000/api/animals/1
 Notice that the value of animalId needs to match the id number in the URL. In this example, they are both 1.
 ``` 
+## Pagination for the API
+
+Access the API endpoint with a query parameter that specifies the page that should be returned. For example, the query string /records?page=2 might return page 2 of the results.
+
+
 
 ## How To Run This Project
 
@@ -75,14 +80,35 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 ### Set Up and Run Project
 
 1. Clone this repo.
-2. Open the terminal and navigate to this project's production directory called "ToDoList".
-3. Within the production directory "ToDoList", create a new file called `appsettings.json`.
+2. Open the terminal and navigate to this project's production directory.
+3. Within the production directory create a new file called `appsettings.json`.
 4. Within `appsettings.json`, put in the following code, replacing the `uid` and `pwd` values with your own username and password for MySQL. For the LearnHowToProgram.com lessons, we always assume the `uid` is `root` and the `pwd` is `epicodus`.
 
 ```json
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*", 
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=to_do_list_with_auth;uid=root;pwd=epicodus;"
+    "DefaultConnection": "Server=localhost;Port=3306;database=cretaceous_api;uid=[YOUR-USERNAME];pwd=[YOUR-PASSWORD];"
+  }
+}
+
+```
+5. Within the production directory create a new file called `appsettings.Development.json`.
+6. Within `appsettings.Development.json`, put in the following code:
+
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
   }
 }
 ```
@@ -131,5 +157,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Copyright (c) 2023 Vera Weikel 
+Copyright (c) 2023 Chris Johnedis, John Diggins, & Vera Weikel 
 

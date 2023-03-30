@@ -1,4 +1,4 @@
-#  Cretaceous Park - an Api Solution
+#  Cretaceous Park - a ClientSide Solution
 
 #### By Vera Weikel 
 
@@ -27,32 +27,36 @@ This project uses ASP.NET Core MVC project to be added do another (API) server.
 * Run the following command within the CretaceousClient.Solution/ directory: dotnet new mvc -o CretaceousClient --framework net6.0
 * Add the RestSharp and NewtonSoft.Json packages as shown in Making an API Call with RestSharp and Deserializing API Responses with Newtonsoft.Json: dotnet add package RestSharp --version 108.0.3; Next, add $ dotnet add package Newtonsoft.Json --version 13.0.2.
 
-## Endpoints: TODO----Call controllers [get/post]
+## Endpoints: 
 
- Document our API's endpoints, make sure we consider what is in our API. For example, in our API:
+Document our API's endpoints, make sure we consider what is in our API. For example, in our API:
 
 * We have multiple endpoints, all of which we want to include in our documentation.
 * Some endpoints include optional query strings that we'll want to document.
 * Some endpoints require a body to be included along with the request.
-
-GET http://localhost:5000/api/animals/
-GET http://localhost:5000/api/animals/{id}
-POST http://localhost:5000/api/animals/
-PUT http://localhost:5000/api/animals/{id}
-DELETE http://localhost:5000/api/animals/{id}
+<br> 
+GET http://localhost:5000/api/tryjson/  (*pagination)<br> 
+GET http://localhost:5000/api/animals/<br> 
+GET http://localhost:5000/api/animals/{id}<br> 
+POST http://localhost:5000/api/animals/<br> 
+PUT http://localhost:5000/api/animals/{id}<br> 
+DELETE http://localhost:5000/api/animals/{id}<br> 
 
 Note: The {id} in the URL is a variable and it should be replaced with the id number of the animal the user wants to GET, PUT, or DELETE.
 
-```
+pageNumber	    | int	| not required	| Returns a specified page number of query items<br> 
+resultsPerPage	| int	| not required	| Returns a specified number of query items per page
 
-  Parameter	|  Type   |	Required	    | Description
-* species	  | String	| not required	| Returns animals with a matching species value
+| species              | String           | not required   | Returns animals with a matching species value|<br> 
 ◊ GET http://localhost:5000/api/animals?species=[ENTER-MATCHING-SPECIES-VALUE]
 * name	    | String	| not required	 | Returns animals with a matching name value
+
 ◊ GET http://localhost:5000/api/animals?name=[ENTER-MATCHING-NAME-VALUE]
 * minimumAge | Number	| not required  | Returns animals that have an age value that is greater than or equal to the specified minimumAge value
 ◊GET http://localhost:5000/api/animals?minimumAge=[ENTER-MINIMUM-AGE-INTEGER-VALUE]
+
 * species&minimumAge | String & Number | neither required	| Returns animals with a matching species value and an age value that is greater than or equal to the specified minimumAge value
+
 ◊ GET http://localhost:5000/api/animals?species=[ENTER-MATCHING-SPECIES-VALUE]&minimumAge=[ENTER-MINIMUM-AGE-INTEGER-VALUE]
 
 ◊ POST request to http://localhost:5000/api/animals/, must have a JSON body included when being made. Here is an example body in JSON:
@@ -67,7 +71,7 @@ Note: The {id} in the URL is a variable and it should be replaced with the id nu
 
 http://localhost:5000/api/animals/1
 Notice that the value of animalId needs to match the id number in the URL. In this example, they are both 1.
-``` 
+
 
 ## How To Run This Project
 

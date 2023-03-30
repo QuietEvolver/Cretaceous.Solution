@@ -10,6 +10,12 @@ public class AnimalsController : Controller
     List<Animal> animals = Animal.GetAnimals();
     return View(animals);
   }
+  
+  public  IActionResult FullIndex()
+  {
+    List<Animal> animals = Animal.GetAnimalsWithPagination();
+    return View(animals);
+  }
 
   public IActionResult Details(int id)
   {
